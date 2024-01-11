@@ -1,0 +1,120 @@
+openapi: 3.0.1
+info:
+  title: Teachers API
+  version: 1.0.0
+  description: API for managing teachers
+tags:
+  - name: Teachers
+paths:
+  '/api/v1/teachers':
+    post:
+      operationId: saveTeachers
+      summary: Save Teachers
+      description: Save Teachers
+      tags:
+        - Teachers
+      requestBody:
+        description: Teachers to save
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'baseSpec.yaml#/components/schemas/TeacherDTO'
+      responses:
+        '200':
+          description: teachers saved
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+    put:
+      operationId: updateTeachers
+      summary: Update Teachers
+      description: Update Teachers
+      tags:
+        - Teachers
+      requestBody:
+        description: Teachers to update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'baseSpec.yaml#/components/schemas/TeacherDTO'
+      responses:
+        '200':
+          description: teachers updated
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/teachers/id/{id}':
+    delete:
+      operationId: deleteTeacherById
+      summary: Delete teacher by Id
+      description: Delete teacher by Id
+      tags:
+        - Teachers
+      parameters:
+        - in: path
+          name: id
+          description: id of teacher
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '204':
+          description: teachers deleted
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'

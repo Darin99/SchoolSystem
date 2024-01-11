@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: Report API
+  version: 1.0.0
+  description: API for managing reports
+tags:
+  - name: Report
+paths:
+  '/api/v1/report/students/count':
+    get:
+      operationId: getStudentsCount
+      summary: Get Students count
+      description: Get Students count
+      tags:
+        - Report
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/students/group/{group}':
+    get:
+      operationId: getStudentsByGroup
+      summary: Get students by group
+      description: Get students by group
+      tags:
+        - Report
+      parameters:
+        - in: path
+          name: group
+          description: group of student
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'baseSpec.yaml#/components/schemas/StudentDTO'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/students/course/{course}':
+    get:
+      operationId: getStudentsByCourse
+      summary: Get students by course
+      description: Get students by course
+      tags:
+        - Report
+      parameters:
+        - in: path
+          name: course
+          description: course of student
+          schema:
+            $ref: 'baseSpec.yaml#/components/schemas/Course'
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'baseSpec.yaml#/components/schemas/StudentDTO'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/teachers/students/group/{group}/course/{course}':
+    get:
+      operationId: getStudentsAndTeachersByGroupAndCourse
+      summary: Get students and teachers by group and course
+      description: Get students and teachers  by group and course
+      tags:
+        - Report
+      parameters:
+        - in: path
+          name: group
+          description: group of student and teacher
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: course
+          description: course of student and teacher
+          schema:
+            $ref: 'baseSpec.yaml#/components/schemas/Course'
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'baseSpec.yaml#/components/schemas/BaseDTO'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/students/age/{age}/course/{course}':
+    get:
+      operationId: getStudentsOlderThanAndCourse
+      summary: Get students older than age and course
+      description: Get students older than age and course
+      tags:
+        - Report
+      parameters:
+        - in: path
+          name: age
+          description: age of student
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - in: path
+          name: course
+          description: course of student
+          schema:
+            $ref: 'baseSpec.yaml#/components/schemas/Course'
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'baseSpec.yaml#/components/schemas/StudentDTO'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/teachers/count':
+    get:
+      operationId: getTeachersCount
+      summary: Get Teachers count
+      description: Get Teachers count
+      tags:
+        - Report
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/report/courses/{course}/count':
+    get:
+      operationId: getCoursesByTypeCount
+      summary: Get courses by type count
+      description: Get courses by type count
+      tags:
+        - Report
+      parameters:
+        - in: path
+          name: course
+          description: type of course
+          schema:
+            $ref: 'baseSpec.yaml#/components/schemas/Course'
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'

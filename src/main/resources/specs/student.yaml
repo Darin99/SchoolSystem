@@ -1,0 +1,120 @@
+openapi: 3.0.1
+info:
+  title: Students API
+  version: 1.0.0
+  description: API for managing students
+tags:
+  - name: Students
+paths:
+  '/api/v1/students':
+    post:
+      operationId: saveStudents
+      summary: Save students
+      description: Save students
+      tags:
+        - Students
+      requestBody:
+        description: Students to save
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'baseSpec.yaml#/components/schemas/StudentDTO'
+      responses:
+        '200':
+          description: students saved
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+    put:
+      operationId: updateStudents
+      summary: Update students
+      description: Update students
+      tags:
+        - Students
+      requestBody:
+        description: Students to update
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: 'baseSpec.yaml#/components/schemas/StudentDTO'
+      responses:
+        '200':
+          description: students updated
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+  '/api/v1/students/id/{id}':
+    delete:
+      operationId: deleteStudentById
+      summary: Delete student by id
+      description: Delete student by id
+      tags:
+        - Students
+      parameters:
+        - in: path
+          name: id
+          description: id of student
+          schema:
+            type: integer
+            format: int64
+          required: true
+      responses:
+        '204':
+          description: students deleted
+          content: { }
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: 'baseSpec.yaml#/components/schemas/ApiError'
